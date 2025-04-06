@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  Joyout
+
+  Created by Gal Sasson on 04/04/2025.
+  
+*/
+/* הגדרות כלליות */
+"General Settings" = "הגדרות כלליות";
+"Launch at login" = "הפעל עם אתחול המחשב";
+"Privacy" = "פרטיות";
+"Joyout does not store or send any clipboard data outside your device." = "האפליקציה Joyout לא שומרת או שולחת מידע מהלוח מחוץ למכשיר שלך.";
+
+/* הגדרות מראה */
+"Appearance" = "מראה";
+"System" = "מערכת";
+"Light" = "בהיר";
+"Dark" = "כהה";
+
+/* קיצורי מקלדת */
+"Keyboard Shortcuts" = "קיצורי מקלדת";
+"Fix Layout" = "תיקון פריסת מקלדת";
+"Remove Underlines" = "הסרת קווים אדומים";
+"Translate Text" = "תרגום טקסט";
+"AI Correct" = "תיקון עם בינה";
+"Add Nikud" = "הוספת ניקוד";
+"Send to Notepad" = "שליחה לפנקס";
+"None" = "ללא";

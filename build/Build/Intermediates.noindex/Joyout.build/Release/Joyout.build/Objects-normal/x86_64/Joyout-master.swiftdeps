@@ -1,0 +1,16 @@
+version: "Apple Swift version 6.1 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)"
+options: "9cb976a9f1a95abda99265c6cd845e63ca958cb73a337dc10a268951d952267d"
+build_start_time: [1743734616, 959972000]
+build_end_time: [1743734631, 47512000]
+inputs:
+  "/Users/galsasson/Downloads/Joyout-project/Joyout/Joyout/AppDelegate.swift": [1743730324, 277748187]
+  "/Users/galsasson/Downloads/Joyout-project/Joyout/Joyout/AppearanceSettings.swift": [1743730324, 277274570]
+  "/Users/galsasson/Downloads/Joyout-project/Joyout/Joyout/ContentView.swift": [1743730324, 278727215]
+  "/Users/galsasson/Downloads/Joyout-project/Joyout/Joyout/EventMonitor.swift": [1743730324, 276775214]
+  "/Users/galsasson/Downloads/Joyout-project/Joyout/Joyout/JoyoutApp.swift": [1743730324, 274613880]
+  "/Users/galsasson/Downloads/Joyout-project/Joyout/Joyout/KeyboardShortcutManager.swift": [1743730324, 276217592]
+  "/Users/galsasson/Downloads/Joyout-project/Joyout/Joyout/MenuBarController.swift": [1743730324, 274121281]
+  "/Users/galsasson/Downloads/Joyout-project/Joyout/Joyout/ScriptRunner.swift": [1743730324, 275540547]
+  "/Users/galsasson/Downloads/Joyout-project/Joyout/Joyout/SettingsView.swift": [1743730324, 273522221]
+  ? "/Users/galsasson/Downloads/Joyout-project/build/Build/Intermediates.noindex/Joyout.build/Release/Joyout.build/DerivedSources/GeneratedAssetSymbols.swift"
+  : [1743734613, 944915521]
