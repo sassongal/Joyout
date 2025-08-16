@@ -1,0 +1,453 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+    "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar_JoyaaSMenuBar.bundle/Assets.xcassets" : {
+      "inputs" : [
+        {
+          "kind" : "directory",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/Assets.xcassets"
+        }
+      ],
+      "outputs" : [
+        {
+          "kind" : "directory",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar_JoyaaSMenuBar.bundle/Assets.xcassets"
+        }
+      ]
+    },
+    "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar_JoyaaSMenuBar.bundle/menubar-icon.png" : {
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/menubar-icon.png"
+        }
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar_JoyaaSMenuBar.bundle/menubar-icon.png"
+        }
+      ]
+    }
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.JoyaaSMenuBar-x86_64-apple-macosx15.0-release.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/sources",
+      "importPath" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/App.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/ClipboardManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/ContentView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/GlobalHotkeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/MenuBarContentView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/NotificationManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/PeacockLogoView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/SettingsView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/SmartTextAnalyzer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/TextProcessor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/DerivedSources/resource_bundle_accessor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<JoyaaSMenuBar-x86_64-apple-macosx15.0-release.module-resources>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "JoyaaSMenuBar",
+      "moduleOutputPath" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/Modules/JoyaaSMenuBar.swiftmodule",
+      "objects" : [
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/App.swift.o",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/ClipboardManager.swift.o",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/ContentView.swift.o",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/GlobalHotkeyManager.swift.o",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/MenuBarContentView.swift.o",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/NotificationManager.swift.o",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/PeacockLogoView.swift.o",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/SettingsView.swift.o",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/SmartTextAnalyzer.swift.o",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/TextProcessor.swift.o",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/resource_bundle_accessor.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-apple-macosx13.0",
+        "-O",
+        "-j12",
+        "-DSWIFT_PACKAGE",
+        "-module-cache-path",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "JoyaaSMenuBar_main",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "joyaas_menubar"
+      ],
+      "outputFileMapPath" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/App.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/ClipboardManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/ContentView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/GlobalHotkeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/MenuBarContentView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/NotificationManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/PeacockLogoView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/SettingsView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/SmartTextAnalyzer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/TextProcessor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/resource_bundle_accessor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/Modules/JoyaaSMenuBar.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/App.swift",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/ClipboardManager.swift",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/ContentView.swift",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/GlobalHotkeyManager.swift",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/MenuBarContentView.swift",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/NotificationManager.swift",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/PeacockLogoView.swift",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/SettingsView.swift",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/SmartTextAnalyzer.swift",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/TextProcessor.swift",
+        "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/DerivedSources/resource_bundle_accessor.swift"
+      ],
+      "tempsPath" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build",
+      "wholeModuleOptimization" : true
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "JoyaaSMenuBar" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "JoyaaSMenuBar",
+      "-package-name",
+      "joyaas_menubar",
+      "-whole-module-optimization",
+      "-num-threads",
+      "12",
+      "-c",
+      "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/App.swift",
+      "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/ClipboardManager.swift",
+      "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/ContentView.swift",
+      "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/GlobalHotkeyManager.swift",
+      "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/MenuBarContentView.swift",
+      "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/NotificationManager.swift",
+      "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/PeacockLogoView.swift",
+      "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/SettingsView.swift",
+      "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/SmartTextAnalyzer.swift",
+      "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/TextProcessor.swift",
+      "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/DerivedSources/resource_bundle_accessor.swift",
+      "-I",
+      "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/Modules",
+      "-target",
+      "x86_64-apple-macosx13.0",
+      "-O",
+      "-j12",
+      "-DSWIFT_PACKAGE",
+      "-module-cache-path",
+      "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "JoyaaSMenuBar_main",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "joyaas_menubar",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "JoyaaSMenuBar" : [
+
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "traitConfiguration" : {
+    "enableAllTraits" : false
+  },
+  "writeCommands" : {
+    "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/App.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/ClipboardManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/ContentView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/GlobalHotkeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/MenuBarContentView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/NotificationManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/PeacockLogoView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/SettingsView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/SmartTextAnalyzer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/JoyaaSMenuBar/TextProcessor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/DerivedSources/resource_bundle_accessor.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/sources"
+    },
+    "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/App.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/ClipboardManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/ContentView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/GlobalHotkeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/MenuBarContentView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/NotificationManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/PeacockLogoView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/SettingsView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/SmartTextAnalyzer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/TextProcessor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.build/resource_bundle_accessor.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/JoyaaSMenuBar.product/Objects.LinkFileList"
+    },
+    "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/galsasson/Downloads/Joyout/JoyaaS-MenuBar/.build/x86_64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

@@ -492,11 +492,11 @@ def create_tables():
 
 if __name__ == '__main__':
     print("🚀 Starting JoyaaS Platform...")
-    print("📊 Dashboard available at: http://localhost:5000")
+    print("📊 Dashboard available at: http://localhost:5432")
     print("🎯 Hebrew/English AI Text Processing SaaS")
     
     with app.app_context():
         db.create_all()
         print("✅ Database initialized")
     
-    app.run(host='127.0.0.1', port=5000, debug=os.environ.get('FLASK_DEBUG', 'True').lower() == 'true')
+    app.run(host='127.0.0.1', port=5432, debug=os.environ.get('FLASK_DEBUG', 'True').lower() == 'true')

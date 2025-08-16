@@ -1,0 +1,4 @@
+Target dependency graph (2 targets)
+Target 'AllExcludingTests' in project 'Aggregate'
+➜ Explicit dependency on target 'JoyaaS_1972E0C322758D_PackageProduct' in project 'JoyaaS'
+Target 'JoyaaS_1972E0C322758D_PackageProduct' in project 'JoyaaS' (no dependencies)

@@ -1,0 +1,112 @@
+{
+  "source": "/Users/galsasson/Downloads/Joyout/JoyaaS-Native-Build/Sources/ContentView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "TEXT OPERATIONS",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 30
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hebrew/English Text Processing",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 21
+        }
+      },
+      {
+        "comment": "",
+        "key": "JoyaaS",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 17
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add API Key",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 86
+        }
+      },
+      {
+        "comment": "",
+        "key": "Input Text",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 100
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enter or paste text to process...",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 114
+        }
+      },
+      {
+        "comment": "",
+        "key": "Processing...",
+        "location": {
+          "startingColumn": 62,
+          "startingLine": 144
+        }
+      },
+      {
+        "comment": "",
+        "key": "Process",
+        "location": {
+          "startingColumn": 80,
+          "startingLine": 144
+        }
+      },
+      {
+        "comment": "",
+        "key": "This may take a moment",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 164
+        }
+      },
+      {
+        "comment": "",
+        "key": "Calling AI...",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 159
+        }
+      },
+      {
+        "comment": "",
+        "key": "Processed Result",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 176
+        }
+      },
+      {
+        "comment": "",
+        "key": "Copy",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 182
+        }
+      },
+      {
+        "comment": "",
+        "key": "Requires API Key",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 273
+        }
+      }
+    ]
+  },
+  "version": 1
+}
