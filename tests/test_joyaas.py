@@ -79,8 +79,8 @@ def test_text_processor():
         assert processor.detect_language(english_text) == "english"
         
         # Test layout fixing
-        fixed = processor.fix_layout("akuo")  # "hello" typed on Hebrew keyboard
-        assert "שלום" in fixed or fixed != "akuo"  # Should be different
+        fixed = processor.fix_layout("susu")  # "דודו" typed on English keyboard
+        assert fixed == "דודו"  # Should convert correctly
         
         # Test text cleaning
         messy_text = "hello    world___"

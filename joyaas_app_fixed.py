@@ -18,6 +18,13 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
+# Add the Scripts directory to the Python path
+scripts_dir = Path(__file__).parent
+sys.path.insert(0, str(scripts_dir))
+
+# Import shared algorithm
+from shared.algorithms import LayoutFixer
+
 def find_free_port(start_port=8080):
     """Find a free port starting from start_port"""
     for port in range(start_port, start_port + 50):
@@ -72,193 +79,14 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.get(user_id)
 
+# Initialize shared layout fixer
+_layout_fixer = LayoutFixer()
+
 # Simple text processing functions
 def fix_layout(text):
-    """Fix text typed in wrong keyboard layout (Hebrew/English) - PERFECT VERSION"""
-    if not text or not text.strip():
-        return text
-    
-    # Accurate Hebrew-to-English mapping based on Israeli keyboard standard
-    hebrew_to_english = {
-        # Top row (QWERTY)
-        'ק': 'e', 'ר': 'r', 'א': 't', 'ט': 'y', 'ו': 'u',
-        'ן': 'i', 'ם': 'o', 'פ': 'p',
-        
-        # Middle row (ASDF)
-        'ש': 'a', 'ד': 's', 'ג': 'd', 'כ': 'f', 'ע': 'g',
-        'י': 'h', 'ח': 'j', 'ל': 'k', 'ך': 'l',
-        
-        # Bottom row (ZXCV)
-        'ז': 'z', 'ס': 'x', 'ב': 'c', 'ה': 'v', 'נ': 'b',
-        'מ': 'n', 'צ': 'm', 'ת': ',', 'ץ': '.'
-    }
-    
-    # Create reverse mapping: English to Hebrew
-    english_to_hebrew = {v: k for k, v in hebrew_to_english.items()}
-    
-    # Detect script content
-    hebrew_chars = sum(1 for c in text if '\u0590' <= c <= '\u05ff')
-    english_chars = sum(1 for c in text if c.isascii() and c.isalpha())
-    
-    # Rule 1: Mixed content (both Hebrew and English) - never convert
-    if hebrew_chars > 0 and english_chars > 0:
-        return text
-        
-    # Rule 2: Too short - never convert single characters
-    if len(text.strip()) < 2:
-        return text
-    
-    # Rule 3: No alphabetic content - never convert
-    if hebrew_chars == 0 and english_chars == 0:
-        return text
-    
-    # Rule 4: Check if this might be a typing mistake
-    
-    # Case A: Pure Hebrew text that might be English typed wrong
-    if hebrew_chars > 0 and english_chars == 0:
-        # Check if ALL Hebrew chars can be mapped to English
-        convertible_hebrew = sum(1 for c in text if c in hebrew_to_english)
-        
-        # Only convert if ALL Hebrew characters can be converted
-        if convertible_hebrew == hebrew_chars and convertible_hebrew >= 2:
-            candidate = ''.join(hebrew_to_english.get(c, c) for c in text)
-            
-            # Additional validation: check if result is reasonable English
-            if _is_reasonable_english(candidate):
-                return candidate
-    
-    # Case B: Pure English text that might be Hebrew typed wrong  
-    elif english_chars > 0 and hebrew_chars == 0:
-        # Check if ALL English chars can be mapped to Hebrew
-        convertible_english = sum(1 for c in text.lower() if c.isalpha() and c in english_to_hebrew)
-        
-        # Only convert if ALL English characters can be converted
-        if convertible_english == english_chars and convertible_english >= 2:
-            candidate = ''.join(english_to_hebrew.get(c.lower(), c) if c.isalpha() else c for c in text)
-            
-            # Additional validation: check if result is reasonable Hebrew
-            if _is_reasonable_hebrew(candidate):
-                return candidate
-    
-    # Default: no conversion
-    return text
+    """Fix text typed in wrong keyboard layout (Hebrew/English) - Uses shared algorithm"""
+    return _layout_fixer.fix_layout(text)
 
-def _is_reasonable_english(text):
-    """Check if text looks like reasonable English"""
-    text = text.lower().strip()
-    
-    # Very common English words - if it matches, it's probably English
-    common_words = {
-        'hello', 'world', 'the', 'and', 'you', 'are', 'have', 'that', 'for', 'not',
-        'with', 'will', 'can', 'said', 'what', 'about', 'out', 'time', 'there',
-        'year', 'work', 'first', 'way', 'even', 'new', 'want', 'because', 'any',
-        'these', 'give', 'day', 'most', 'us', 'over', 'think', 'also', 'your',
-        'after', 'use', 'man', 'new', 'now', 'old', 'see', 'him', 'two', 'how',
-        'its', 'who', 'did', 'yes', 'his', 'has', 'had', 'let', 'put', 'say',
-        'she', 'may', 'use', 'her', 'him', 'one', 'our', 'out', 'day', 'get',
-        'has', 'may', 'say', 'she', 'use', 'her', 'now', 'him', 'one', 'our'
-    }
-    
-    # Check exact match first
-    if text in common_words:
-        return True
-    
-    # For longer words, check vowel/consonant ratio
-    if len(text) >= 3:
-        vowels = sum(1 for c in text if c in 'aeiou')
-        consonants = sum(1 for c in text if c.isalpha() and c not in 'aeiou')
-        
-        if vowels + consonants == 0:
-            return False
-            
-        vowel_ratio = vowels / (vowels + consonants)
-        
-        # English typically has 20-60% vowels
-        if 0.15 <= vowel_ratio <= 0.65:
-            # Additional check: no more than 3 consecutive consonants
-            consecutive_consonants = 0
-            max_consecutive = 0
-            
-            for c in text:
-                if c.isalpha() and c not in 'aeiou':
-                    consecutive_consonants += 1
-                    max_consecutive = max(max_consecutive, consecutive_consonants)
-                else:
-                    consecutive_consonants = 0
-                    
-            return max_consecutive <= 3
-    
-    # For short words, be more restrictive
-    return False
-
-def _is_reasonable_hebrew(text):
-    """Check if text looks like reasonable Hebrew"""
-    # Remove spaces for analysis
-    clean = text.replace(' ', '')
-    
-    # Check if all characters are Hebrew
-    hebrew_chars = sum(1 for c in clean if '\u0590' <= c <= '\u05ff')
-    
-    if hebrew_chars != len(clean) or len(clean) == 0:
-        return False
-    
-    # Common Hebrew words
-    common_hebrew = {
-        'שלום', 'שלומות', 'היי', 'כן', 'לא', 'את', 'אני', 'הוא', 'היא', 
-        'אנחנו', 'אתם', 'הם', 'מה', 'איך', 'למה', 'איפה', 'מתי', 'כמה',
-        'בוא', 'בואי', 'לך', 'לכי', 'לכו', 'תודה', 'תודות', 'סליחה',
-        'בסדר', 'טוב', 'רע', 'יפה', 'גדול', 'קטן', 'חדש', 'ישן',
-        'בית', 'בתים', 'דלת', 'חלון', 'שולחן', 'כיסא', 'מיטה',
-        'אוכל', 'לחם', 'מים', 'חלב', 'ביצה', 'בשר', 'דג', 'פרי',
-        'יום', 'לילה', 'בוקר', 'ערב', 'שבת', 'חג'
-    }
-    
-    # Check if it's a known Hebrew word
-    if clean in common_hebrew:
-        return True
-    
-    # For unknown words, use letter frequency heuristics
-    # Hebrew has certain common letters
-    if len(clean) >= 2:
-        common_hebrew_letters = set('אבגדהוזחטיכלמנסעפצקרשת')
-        hebrew_letter_count = sum(1 for c in clean if c in common_hebrew_letters)
-        
-        # Most of the letters should be common Hebrew letters
-        return hebrew_letter_count >= len(clean) * 0.8
-    
-    return True  # Default to true for very short text
-
-def _looks_like_english(text):
-    """Simple heuristic to check if text looks like reasonable English"""
-    # Check for common English patterns
-    common_english = {'the', 'and', 'is', 'to', 'of', 'a', 'in', 'it', 'you', 'that', 'he', 'was', 'for', 'on', 'are', 'as', 'with', 'his', 'they', 'i', 'at', 'be', 'this', 'have', 'from', 'or', 'one', 'had', 'by', 'word', 'but', 'not', 'what', 'all', 'were', 'we', 'when', 'your', 'can', 'said', 'there', 'each', 'which', 'she', 'do', 'how', 'their', 'if', 'will', 'up', 'other', 'about', 'out', 'many', 'then', 'them', 'these', 'so', 'some', 'her', 'would', 'make', 'like', 'into', 'him', 'has', 'two', 'more', 'her', 'go', 'see', 'no', 'way', 'could', 'my', 'than', 'first', 'water', 'been', 'call', 'who', 'its', 'now', 'find', 'long', 'down', 'day', 'did', 'get', 'come', 'made', 'may', 'part'}
-    
-    # Check if it's a common English word or has reasonable vowel/consonant distribution
-    text_lower = text.lower().strip()
-    if text_lower in common_english:
-        return True
-    
-    # Check vowel ratio (English typically has good vowel distribution)
-    if len(text_lower) > 1:
-        vowels = sum(1 for c in text_lower if c in 'aeiou')
-        ratio = vowels / len(text_lower)
-        return 0.1 <= ratio <= 0.6  # Reasonable vowel ratio
-    
-    return True  # Default to true for short text
-
-def _looks_like_hebrew(text):
-    """Simple heuristic to check if text looks like reasonable Hebrew"""
-    # Common Hebrew words/patterns
-    common_hebrew_words = {'של', 'ושלום', 'שלום', 'היי', 'כן', 'לא', 'של', 'ואת', 'את', 'הוא', 'היא', 'לכם', 'לך', 'לי', 'לנו', 'מה', 'בא', 'לבוא', 'ללכת', 'לראות', 'לעשות', 'להיות', 'אחד', 'שנים', 'שלושה', 'ארבעה', 'חמשה'}
-    
-    # Remove spaces and check
-    clean_text = text.replace(' ', '')
-    if clean_text in common_hebrew_words:
-        return True
-        
-    # Check if all characters are valid Hebrew
-    hebrew_chars = sum(1 for c in clean_text if '\u0590' <= c <= '\u05ff')
-    return hebrew_chars == len(clean_text) and len(clean_text) > 0
 
 def clean_text(text):
     """Remove formatting artifacts"""
