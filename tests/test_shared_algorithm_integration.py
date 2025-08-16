@@ -10,9 +10,9 @@ import sys
 import os
 from pathlib import Path
 
-# Add current directory to Python path
-scripts_dir = Path(__file__).parent
-sys.path.insert(0, str(scripts_dir))
+# Add project root directory to Python path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
 
 def test_shared_algorithm_directly():
     """Test the shared algorithm directly"""

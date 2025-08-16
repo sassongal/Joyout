@@ -142,3 +142,4 @@ src/
 package_dmg.sh
 test.sh
 todo.md
+.build/
