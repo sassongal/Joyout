@@ -1,70 +1,79 @@
-# Joyout Text Processing Tools
+# 🚀 JoyaaS - Professional Hebrew/English Text Processing SaaS
 
-A collection of powerful text processing utilities for macOS that work with your clipboard to provide Hebrew/English language support, translation, and text cleaning capabilities.
+**JoyaaS (Joyout as a Service)** is a complete transformation from a simple macOS clipboard tool to a professional, cloud-based SaaS platform for Hebrew and English text processing.
 
-## 🌟 Features
+## ✨ What Changed?
 
-- **Hebrew Nikud Addition** - Automatically adds vowelization (nikud) to Hebrew text
-- **Language Correction** - Fixes spelling and grammar in Hebrew and English
-- **Smart Translation** - Translates between Hebrew and English with auto-detection
-- **Layout Fixer** - Fixes text typed in wrong keyboard layout
-- **Text Cleaner** - Removes formatting artifacts and unwanted characters
-- **Clipboard to TextEdit** - Quick copy to TextEdit for further editing
+### Before: Local macOS Tool
+- ❌ macOS only
+- ❌ Clipboard dependent
+- ❌ Single user
+- ❌ No web interface
+- ❌ No user management
+- ❌ No analytics
+
+### After: Global SaaS Platform
+- ✅ **Cross-platform** - Works on ANY device with a browser
+- ✅ **Web-based** - No clipboard limitations
+- ✅ **Multi-user** - User accounts and authentication
+- ✅ **Professional UI** - Modern, responsive dashboard
+- ✅ **Usage analytics** - Track processing patterns
+- ✅ **API access** - RESTful API for developers
+- ✅ **Batch processing** - Handle multiple texts at once
+- ✅ **Subscription tiers** - Monetization ready
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### Launch JoyaaS Platform
+```bash
+cd Resources/Scripts
+chmod +x install_joyaas.sh
+./install_joyaas.sh
+python3 joyaas_app.py
+```
 
-- macOS (tested on macOS 10.15+)
-- Python 3.7 or higher
-- Google AI API key (free from Google AI Studio)
+### Visit Your Platform
+Open http://localhost:5000 in any browser
 
-### Installation
+## 🎯 Core Features
 
-1. Clone or download this repository
-2. Install dependencies:
-   ```bash
-   pip3 install -r requirements.txt
-   ```
-3. Set up your API keys:
-   ```bash
-   python3 config.py
-   ```
+### Text Processing Tools
+- **Hebrew Nikud Addition** - Add vowelization to Hebrew text
+- **Language Correction** - Fix spelling and grammar (Hebrew/English)
+- **Smart Translation** - Hebrew ↔ English with context awareness
+- **Layout Fixer** - Fix text typed in wrong keyboard layout
+- **Text Cleaner** - Remove formatting artifacts
+- **Batch Processing** - Process multiple texts simultaneously
 
-### Getting Your Free Google AI API Key
+### SaaS Platform Features
+- **User Registration & Login** - Secure authentication system
+- **Usage Analytics** - Track processing patterns and statistics
+- **API Access** - Full RESTful API with documentation
+- **Subscription Management** - Free/Pro/Enterprise tiers
+- **Processing History** - Review past operations
+- **Modern Dashboard** - Professional web interface
 
-1. Visit [Google AI Studio](https://aistudio.google.com/app/apikey)
-2. Sign in with your Google account
-3. Click "Create API Key"
-4. Copy the generated API key
-5. Run `python3 config.py` and paste your API key when prompted
+## 📊 Subscription Plans
 
-## 📱 Usage
+| Plan | Monthly Limit | Price | Features |
+|------|---------------|-------|----------|
+| **Free** | 100 processes | $0 | All tools + Basic API |
+| **Pro** | 5,000 processes | $19 | Priority support + Analytics |
+| **Enterprise** | 50,000 processes | $99 | Custom integrations + Webhooks |
 
-All scripts work with your system clipboard. Simply:
+## 🔌 API Usage
 
-1. Copy/select text you want to process
-2. Run the appropriate script
-3. The processed text replaces your clipboard content
+```bash
+# Process single text
+curl -X POST http://localhost:5000/api/process \
+  -H "Content-Type: application/json" \
+  -d '{"text": "שלום עולם", "operation": "hebrew_nikud"}'
 
-### Available Scripts
-
-| Script | Purpose | Usage |
-|--------|---------|-------|
-| `hebrew_nikud.py` | Add nikud to Hebrew text | `python3 hebrew_nikud.py` |
-| `language_corrector.py` | Fix spelling/grammar | `python3 language_corrector.py` |
-| `clipboard_translator.py` | Translate text | `python3 clipboard_translator.py` |
-| `layout_fixer.py` | Fix keyboard layout mistakes | `python3 layout_fixer.py` |
-| `underline_remover.py` | Clean text formatting | `python3 underline_remover.py` |
-| `clipboard_to_notepad.py` | Copy to TextEdit | `python3 clipboard_to_notepad.py` |
-
-### Keyboard Shortcuts (Optional)
-
-You can set up keyboard shortcuts in macOS System Preferences > Keyboard > Shortcuts to run these scripts quickly:
-
-1. Go to System Preferences > Keyboard > Shortcuts > Services
-2. Add new shortcuts for each script
-3. Use Automator to create Quick Actions that run the Python scripts
+# Batch processing
+curl -X POST http://localhost:5000/api/batch_process \
+  -H "Content-Type: application/json" \
+  -d '{"texts": ["שלום", "עולם"], "operation": "translate"}'
+```
 
 ## ⚙️ Configuration
 
