@@ -220,32 +220,159 @@ class TextProcessor:
             return text
     
     def fix_layout(self, text):
-        """Fix text typed in wrong keyboard layout"""
-        if not text.strip():
+        """Fix text typed in wrong keyboard layout (Hebrew/English) - CORRECTED VERSION"""
+        if not text or not text.strip():
             return text
         
-        # Hebrew to English keyboard mapping
+        # Accurate Hebrew-to-English mapping based on Israeli keyboard standard
         hebrew_to_english = {
-            'א': 't', 'ב': 'c', 'ג': 'd', 'ד': 's', 'ה': 'b', 'ו': 'o', 'ז': 'z', 'ח': 'g',
-            'ט': 'y', 'י': 'h', 'כ': 'f', 'ל': 'k', 'מ': 'n', 'נ': 'j', 'ס': 'x', 'ע': 'u',
-            'פ': 'p', 'צ': 'm', 'ק': 'e', 'ר': 'r', 'ש': 'a', 'ת': ',', 'ן': 'l', 'ם': 'o',
-            'ף': ';', 'ץ': '.', 'ך': 'i'
+            # Top row (QWERTY)
+            'ק': 'e', 'ר': 'r', 'א': 't', 'ט': 'y', 'ו': 'u',
+            'ן': 'i', 'ם': 'o', 'פ': 'p',
+            
+            # Middle row (ASDF)
+            'ש': 'a', 'ד': 's', 'ג': 'd', 'כ': 'f', 'ע': 'g',
+            'י': 'h', 'ח': 'j', 'ל': 'k', 'ך': 'l',
+            
+            # Bottom row (ZXCV)
+            'ז': 'z', 'ס': 'x', 'ב': 'c', 'ה': 'v', 'נ': 'b',
+            'מ': 'n', 'צ': 'm', 'ת': ',', 'ץ': '.'
         }
         
-        # English to Hebrew keyboard mapping
+        # Create reverse mapping: English to Hebrew
         english_to_hebrew = {v: k for k, v in hebrew_to_english.items()}
         
-        # Try both directions
-        fixed_text = text
+        # Detect script content
+        hebrew_chars = sum(1 for c in text if '\u0590' <= c <= '\u05ff')
+        english_chars = sum(1 for c in text if c.isascii() and c.isalpha())
         
-        # Check if text looks like Hebrew typed on English keyboard
-        if any(c in english_to_hebrew for c in text.lower()):
-            fixed_text = ''.join(english_to_hebrew.get(c.lower(), c) for c in text)
-        # Check if text looks like English typed on Hebrew keyboard
-        elif any(c in hebrew_to_english for c in text):
-            fixed_text = ''.join(hebrew_to_english.get(c, c) for c in text)
+        # Rule 1: Mixed content (both Hebrew and English) - never convert
+        if hebrew_chars > 0 and english_chars > 0:
+            return text
+            
+        # Rule 2: Too short - never convert single characters
+        if len(text.strip()) < 2:
+            return text
         
-        return fixed_text
+        # Rule 3: No alphabetic content - never convert
+        if hebrew_chars == 0 and english_chars == 0:
+            return text
+        
+        # Rule 4: Check if this might be a typing mistake
+        
+        # Case A: Pure Hebrew text that might be English typed wrong
+        if hebrew_chars > 0 and english_chars == 0:
+            # Check if ALL Hebrew chars can be mapped to English
+            convertible_hebrew = sum(1 for c in text if c in hebrew_to_english)
+            
+            # Only convert if ALL Hebrew characters can be converted
+            if convertible_hebrew == hebrew_chars and convertible_hebrew >= 2:
+                candidate = ''.join(hebrew_to_english.get(c, c) for c in text)
+                
+                # Additional validation: check if result is reasonable English
+                if self._is_reasonable_english(candidate):
+                    return candidate
+        
+        # Case B: Pure English text that might be Hebrew typed wrong  
+        elif english_chars > 0 and hebrew_chars == 0:
+            # Check if ALL English chars can be mapped to Hebrew
+            convertible_english = sum(1 for c in text.lower() if c.isalpha() and c in english_to_hebrew)
+            
+            # Only convert if ALL English characters can be converted
+            if convertible_english == english_chars and convertible_english >= 2:
+                candidate = ''.join(english_to_hebrew.get(c.lower(), c) if c.isalpha() else c for c in text)
+                
+                # Additional validation: check if result is reasonable Hebrew
+                if self._is_reasonable_hebrew(candidate):
+                    return candidate
+        
+        # Default: no conversion
+        return text
+    
+    def _is_reasonable_english(self, text):
+        """Check if text looks like reasonable English"""
+        text = text.lower().strip()
+        
+        # Very common English words - if it matches, it's probably English
+        common_words = {
+            'hello', 'world', 'the', 'and', 'you', 'are', 'have', 'that', 'for', 'not',
+            'with', 'will', 'can', 'said', 'what', 'about', 'out', 'time', 'there',
+            'year', 'work', 'first', 'way', 'even', 'new', 'want', 'because', 'any',
+            'these', 'give', 'day', 'most', 'us', 'over', 'think', 'also', 'your',
+            'after', 'use', 'man', 'new', 'now', 'old', 'see', 'him', 'two', 'how',
+            'its', 'who', 'did', 'yes', 'his', 'has', 'had', 'let', 'put', 'say',
+            'she', 'may', 'use', 'her', 'him', 'one', 'our', 'out', 'day', 'get',
+            'has', 'may', 'say', 'she', 'use', 'her', 'now', 'him', 'one', 'our'
+        }
+        
+        # Check exact match first
+        if text in common_words:
+            return True
+        
+        # For longer words, check vowel/consonant ratio
+        if len(text) >= 3:
+            vowels = sum(1 for c in text if c in 'aeiou')
+            consonants = sum(1 for c in text if c.isalpha() and c not in 'aeiou')
+            
+            if vowels + consonants == 0:
+                return False
+                
+            vowel_ratio = vowels / (vowels + consonants)
+            
+            # English typically has 20-60% vowels
+            if 0.15 <= vowel_ratio <= 0.65:
+                # Additional check: no more than 3 consecutive consonants
+                consecutive_consonants = 0
+                max_consecutive = 0
+                
+                for c in text:
+                    if c.isalpha() and c not in 'aeiou':
+                        consecutive_consonants += 1
+                        max_consecutive = max(max_consecutive, consecutive_consonants)
+                    else:
+                        consecutive_consonants = 0
+                        
+                return max_consecutive <= 3
+        
+        # For short words, be more restrictive
+        return False
+    
+    def _is_reasonable_hebrew(self, text):
+        """Check if text looks like reasonable Hebrew"""
+        # Remove spaces for analysis
+        clean = text.replace(' ', '')
+        
+        # Check if all characters are Hebrew
+        hebrew_chars = sum(1 for c in clean if '\u0590' <= c <= '\u05ff')
+        
+        if hebrew_chars != len(clean) or len(clean) == 0:
+            return False
+        
+        # Common Hebrew words
+        common_hebrew = {
+            'שלום', 'שלומות', 'היי', 'כן', 'לא', 'את', 'אני', 'הוא', 'היא', 
+            'אנחנו', 'אתם', 'הם', 'מה', 'איך', 'למה', 'איפה', 'מתי', 'כמה',
+            'בוא', 'בואי', 'לך', 'לכי', 'לכו', 'תודה', 'תודות', 'סליחה',
+            'בסדר', 'טוב', 'רע', 'יפה', 'גדול', 'קטן', 'חדש', 'ישן',
+            'בית', 'בתים', 'דלת', 'חלון', 'שולחן', 'כיסא', 'מיטה',
+            'אוכל', 'לחם', 'מים', 'חלב', 'ביצה', 'בשר', 'דג', 'פרי',
+            'יום', 'לילה', 'בוקר', 'ערב', 'שבת', 'חג', 'דודו', 'דעדע'
+        }
+        
+        # Check if it's a known Hebrew word
+        if clean in common_hebrew:
+            return True
+        
+        # For unknown words, use letter frequency heuristics
+        # Hebrew has certain common letters
+        if len(clean) >= 2:
+            common_hebrew_letters = set('אבגדהוזחטיכלמנסעפצקרשת')
+            hebrew_letter_count = sum(1 for c in clean if c in common_hebrew_letters)
+            
+            # Most of the letters should be common Hebrew letters
+            return hebrew_letter_count >= len(clean) * 0.8
+        
+        return True  # Default to true for very short text
     
     def clean_text(self, text):
         """Remove formatting artifacts and clean text"""
