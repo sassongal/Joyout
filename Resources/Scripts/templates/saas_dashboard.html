@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - JoyaaS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f8fafc;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navbar-user {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .usage-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .user-menu {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .dashboard-header {
+            margin-bottom: 32px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-header p {
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: #4a5568;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .stat-icon {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #667eea;
+            font-size: 20px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .processing-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+        }
+
+        .processing-header {
+            margin-bottom: 24px;
+        }
+
+        .processing-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .processing-tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #64748b;
+            transition: all 0.2s ease;
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .text-input {
+            width: 100%;
+            min-height: 150px;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            resize: vertical;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .text-output {
+            background: #e6fffa;
+            border: 2px solid #81e6d9;
+            min-height: 150px;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            white-space: pre-wrap;
+            margin-bottom: 16px;
+        }
+
+        .process-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .operation-select {
+            padding: 8px 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            background: white;
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .sidebar-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+        }
+
+        .sidebar-panel h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .api-key-section {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .api-key {
+            font-family: monospace;
+            font-size: 0.85rem;
+            background: #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin: 8px 0;
+            word-break: break-all;
+        }
+
+        .recent-activity {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 32px;
+            height: 32px;
+            background: #667eea;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        .activity-text {
+            flex: 1;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: #a0aec0;
+        }
+
+        .batch-upload {
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .batch-upload.dragover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .batch-results {
+            max-height: 300px;
+            overflow-y: auto;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .result-item {
+            background: white;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-left: 3px solid #48bb78;
+        }
+
+        .result-item.error {
+            border-left-color: #f56565;
+        }
+
+        .notification {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            padding: 16px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            max-width: 400px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, #f56565, #e53e3e);
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .quick-action {
+            padding: 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #4a5568;
+        }
+
+        .quick-action:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .usage-meter {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+
+        .usage-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .processing-tabs {
+                flex-wrap: wrap;
+            }
+
+            .navbar {
+                padding: 12px 16px;
+            }
+
+            .processing-panel {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/dashboard" class="navbar-brand">
+            <i class="fas fa-magic"></i> JoyaaS
+        </a>
+        <div class="navbar-user">
+            <div class="usage-badge">
+                {{ stats.monthly_usage }}/{{ stats.usage_limit }} used
+            </div>
+            <div class="user-menu">
+                <div class="user-avatar">{{ current_user.username[0].upper() }}</div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Welcome back, {{ current_user.username }}!</h1>
+            <p>Process Hebrew and English text with AI-powered tools</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="stat-value">{{ stats.total_processed }}</div>
+                <div class="stat-label">Total Processed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-calendar-month"></i></div>
+                <div class="stat-value">{{ stats.monthly_usage }}</div>
+                <div class="stat-label">This Month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-crown"></i></div>
+                <div class="stat-value">{{ stats.subscription_tier }}</div>
+                <div class="stat-label">Plan</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+                <div class="stat-value">{{ stats.usage_limit - stats.monthly_usage }}</div>
+                <div class="stat-label">Remaining</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="processing-panel">
+                <div class="processing-header">
+                    <h2><i class="fas fa-wand-magic-sparkles"></i> Text Processing</h2>
+                    <p>Process your text with powerful AI tools</p>
+                </div>
+
+                <div class="processing-tabs">
+                    <button class="tab-button active" data-tab="single">Single Text</button>
+                    <button class="tab-button" data-tab="batch">Batch Process</button>
+                    <button class="tab-button" data-tab="api">API Usage</button>
+                </div>
+
+                <div class="tab-content active" id="single-tab">
+                    <textarea class="text-input" id="input-text" placeholder="Paste your Hebrew or English text here..."></textarea>
+                    
+                    <div class="text-output" id="output-text">Processed text will appear here...</div>
+
+                    <div class="process-controls">
+                        <select class="operation-select" id="operation-select">
+                            <option value="hebrew_nikud">Hebrew Nikud</option>
+                            <option value="correct_text">Language Correction</option>
+                            <option value="translate">Translation</option>
+                            <option value="fix_layout">Layout Fixer</option>
+                            <option value="clean_text">Text Cleaner</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="processText()">
+                            <i class="fas fa-magic"></i> Process
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearText()">
+                            <i class="fas fa-times"></i> Clear
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="batch-tab">
+                    <div class="batch-upload" id="batch-upload">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #cbd5e0; margin-bottom: 12px;"></i>
+                        <p>Drop files here or click to upload</p>
+                        <p style="font-size: 0.85rem; color: #a0aec0; margin-top: 8px;">Supports .txt, .csv, or paste multiple texts</p>
+                        <input type="file" id="file-upload" style="display: none;" accept=".txt,.csv" multiple>
+                    </div>
+                    
+                    <textarea class="text-input" id="batch-input" placeholder="Or paste multiple texts here, one per line..."></textarea>
+                    
+                    <div class="process-controls" style="margin-bottom: 16px;">
+                        <select class="operation-select" id="batch-operation">
+                            <option value="hebrew_nikud">Hebrew Nikud</option>
+                            <option value="correct_text">Language Correction</option>
+                            <option value="translate">Translation</option>
+                            <option value="fix_layout">Layout Fixer</option>
+                            <option value="clean_text">Text Cleaner</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="processBatch()">
+                            <i class="fas fa-batch"></i> Process Batch
+                        </button>
+                    </div>
+
+                    <div class="batch-results" id="batch-results" style="display: none;"></div>
+                </div>
+
+                <div class="tab-content" id="api-tab">
+                    <div class="api-key-section">
+                        <h4><i class="fas fa-key"></i> Your API Key</h4>
+                        <div class="api-key">{{ stats.api_key }}</div>
+                        <button class="btn btn-secondary" onclick="copyApiKey()">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+
+                    <div style="background: #f8fafc; padding: 16px; border-radius: 8px;">
+                        <h4>API Usage Example</h4>
+                        <pre style="background: #2d3748; color: #e2e8f0; padding: 12px; border-radius: 4px; font-size: 0.85rem; margin-top: 8px; overflow-x: auto;">curl -X POST https://joyaas.com/api/process \
+-H "Authorization: Bearer {{ stats.api_key }}" \
+-H "Content-Type: application/json" \
+-d '{"text": "שלום עולם", "operation": "hebrew_nikud"}'</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="sidebar-panel">
+                    <h3><i class="fas fa-chart-pie"></i> Usage</h3>
+                    <div class="usage-meter">
+                        <div class="usage-fill" style="width: {{ (stats.monthly_usage / stats.usage_limit * 100) | int }}%"></div>
+                    </div>
+                    <p style="font-size: 0.85rem; color: #4a5568;">{{ stats.monthly_usage }} of {{ stats.usage_limit }} used this month</p>
+                    
+                    {% if stats.subscription_tier == 'Free' %}
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 12px;">
+                        <i class="fas fa-arrow-up"></i> Upgrade Plan
+                    </button>
+                    {% endif %}
+                </div>
+
+                <div class="sidebar-panel">
+                    <h3><i class="fas fa-zap"></i> Quick Actions</h3>
+                    <div class="quick-actions">
+                        <div class="quick-action" onclick="setOperation('hebrew_nikud')">
+                            <i class="fas fa-language"></i><br>Hebrew Nikud
+                        </div>
+                        <div class="quick-action" onclick="setOperation('translate')">
+                            <i class="fas fa-exchange-alt"></i><br>Translate
+                        </div>
+                        <div class="quick-action" onclick="setOperation('correct_text')">
+                            <i class="fas fa-spell-check"></i><br>Correct
+                        </div>
+                        <div class="quick-action" onclick="setOperation('fix_layout')">
+                            <i class="fas fa-keyboard"></i><br>Fix Layout
+                        </div>
+                    </div>
+                </div>
+
+                {% if stats.recent_activity %}
+                <div class="sidebar-panel">
+                    <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                    <div class="recent-activity">
+                        {% for activity in stats.recent_activity[:5] %}
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <div class="activity-text">{{ activity.operation_type.replace('_', ' ').title() }}</div>
+                            <div class="activity-time">{{ activity.created_at.strftime('%H:%M') }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const tabName = button.dataset.tab;
+                
+                // Remove active class from all tabs and buttons
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                document.getElementById(tabName + '-tab').classList.add('active');
+            });
+        });
+
+        // Text processing
+        async function processText() {
+            const inputText = document.getElementById('input-text').value.trim();
+            const operation = document.getElementById('operation-select').value;
+            
+            if (!inputText) {
+                showNotification('Please enter some text to process', 'error');
+                return;
+            }
+
+            const outputDiv = document.getElementById('output-text');
+            outputDiv.textContent = 'Processing...';
+
+            try {
+                const response = await fetch('/api/process', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text: inputText,
+                        operation: operation
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    outputDiv.textContent = data.result;
+                    showNotification(`Text processed successfully! ${data.remaining_usage} uses remaining.`, 'success');
+                    updateUsageStats();
+                } else {
+                    outputDiv.textContent = 'Error: ' + data.error;
+                    showNotification(data.error, 'error');
+                }
+            } catch (error) {
+                outputDiv.textContent = 'Network error occurred';
+                showNotification('Network error occurred', 'error');
+            }
+        }
+
+        // Batch processing
+        async function processBatch() {
+            const batchInput = document.getElementById('batch-input').value.trim();
+            const operation = document.getElementById('batch-operation').value;
+            
+            if (!batchInput) {
+                showNotification('Please enter texts to process', 'error');
+                return;
+            }
+
+            const texts = batchInput.split('\n').filter(line => line.trim());
+            
+            if (texts.length === 0) {
+                showNotification('No valid texts found', 'error');
+                return;
+            }
+
+            const resultsDiv = document.getElementById('batch-results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = '<p>Processing ' + texts.length + ' texts...</p>';
+
+            try {
+                const response = await fetch('/api/batch_process', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        texts: texts,
+                        operation: operation
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    let resultsHTML = '';
+                    data.results.forEach((result, index) => {
+                        const statusClass = result.success ? '' : ' error';
+                        resultsHTML += `
+                            <div class="result-item${statusClass}">
+                                <strong>Input ${index + 1}:</strong> ${result.input.substring(0, 100)}${result.input.length > 100 ? '...' : ''}<br>
+                                <strong>Output:</strong> ${result.success ? result.output.substring(0, 100) + (result.output.length > 100 ? '...' : '') : result.error}
+                            </div>
+                        `;
+                    });
+                    resultsDiv.innerHTML = resultsHTML;
+                    showNotification(`Batch processed! ${data.processed_count}/${texts.length} successful. ${data.remaining_usage} uses remaining.`, 'success');
+                    updateUsageStats();
+                } else {
+                    resultsDiv.innerHTML = '<p class="error">Error: ' + data.error + '</p>';
+                    showNotification(data.error, 'error');
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = '<p class="error">Network error occurred</p>';
+                showNotification('Network error occurred', 'error');
+            }
+        }
+
+        // Utility functions
+        function clearText() {
+            document.getElementById('input-text').value = '';
+            document.getElementById('output-text').textContent = 'Processed text will appear here...';
+        }
+
+        function setOperation(operation) {
+            document.getElementById('operation-select').value = operation;
+            document.querySelector('.tab-button[data-tab="single"]').click();
+        }
+
+        function copyApiKey() {
+            navigator.clipboard.writeText('{{ stats.api_key }}');
+            showNotification('API key copied to clipboard', 'success');
+        }
+
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+        }
+
+        async function updateUsageStats() {
+            try {
+                const response = await fetch('/api/usage');
+                const data = await response.json();
+                
+                // Update usage display
+                document.querySelector('.usage-badge').textContent = `${data.monthly_usage}/${data.usage_limit} used`;
+                document.querySelector('.usage-fill').style.width = `${(data.monthly_usage / data.usage_limit * 100)}%`;
+                
+                // Update stat cards
+                document.querySelector('.stat-value').textContent = data.total_usage;
+                document.querySelectorAll('.stat-value')[1].textContent = data.monthly_usage;
+                document.querySelectorAll('.stat-value')[3].textContent = data.usage_limit - data.monthly_usage;
+            } catch (error) {
+                console.error('Failed to update usage stats:', error);
+            }
+        }
+
+        // File upload handling
+        document.getElementById('batch-upload').addEventListener('click', () => {
+            document.getElementById('file-upload').click();
+        });
+
+        document.getElementById('file-upload').addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            if (files.length === 0) return;
+
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const currentText = document.getElementById('batch-input').value;
+                    document.getElementById('batch-input').value = currentText + '\n' + e.target.result;
+                };
+                reader.readAsText(file);
+            });
+        });
+
+        // Drag and drop
+        const batchUpload = document.getElementById('batch-upload');
+        batchUpload.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            batchUpload.classList.add('dragover');
+        });
+
+        batchUpload.addEventListener('dragleave', () => {
+            batchUpload.classList.remove('dragover');
+        });
+
+        batchUpload.addEventListener('drop', (e) => {
+            e.preventDefault();
+            batchUpload.classList.remove('dragover');
+            
+            const files = Array.from(e.dataTransfer.files);
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const currentText = document.getElementById('batch-input').value;
+                    document.getElementById('batch-input').value = currentText + '\n' + e.target.result;
+                };
+                reader.readAsText(file);
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                if (document.querySelector('.tab-button.active').dataset.tab === 'single') {
+                    processText();
+                } else if (document.querySelector('.tab-button.active').dataset.tab === 'batch') {
+                    processBatch();
+                }
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUsageStats();
+        });
+    </script>
+</body>
+</html>
